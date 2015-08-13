@@ -1,0 +1,17 @@
+{
+	"status": 1, 
+	"msg": "系统异常，参数输入错误", 
+	"currentpage": 1,
+	"pagesize": 10,
+	"totalcount": 100,
+	"totalpage": 10,
+	"data": [{
+			"hu_area": "深圳",
+			"hu_telephone" : "讲师座机",
+			"hu_mobile":"讲师电话号码",
+			"hu_address": "中国(China）-  深圳(shenzhen）-  F5[F5-3-A023] ",
+			"hu_level": "20级",
+			"hu_brief": "HUAWEI speaker and evangelist, is a content marketing  expert deicated to helping companies grow profits by creating content. One of the founders of the content marketing movement. Joe lauched what is now the content marketing institude back in 2007 as a true online resource for those interested in content marketing and brand storying. Joe started using  “content marketing”back in 2006."
+		}
+	]
+}

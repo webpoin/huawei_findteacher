@@ -1,0 +1,18 @@
+    <form class="search" ng-controller="search" ng-submit="submit()">
+      <label>
+        <input type="text" placehoder="请输入关键字搜索" ng-model="data.key">
+        <button type="submit"><i class="icon icon-find"></i></button>
+      </label>
+    </form>
+    <dl class="prompt" >
+      <dt ng-show="lately">最近搜索<a ng-click="cleanUp()" >清除</a></dt>
+      <dd ng-show="lately">
+        <a ng-repeat="item in late track by $index" ng-click="search('{{item}}')">{{item}}</a>
+      </dd>
+      <dt>热门搜索 <a ng-click="updateHot()" ng-show="replace">换一批</a></dt>
+      <dd>
+        <a ng-repeat="item in hot track by $index" ng-click="search('{{item}}')">{{item}}</a>
+      </dd>
+    </dl>
+
+   

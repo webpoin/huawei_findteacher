@@ -1,0 +1,16 @@
+{
+	"status": 1,
+	"msg": "系统异常，参数输入错误",
+	"currentpage": 1,
+	"pagesize": 10,
+	"totalcount": 100,
+	"totalpage": 10,
+	"data": [
+		{"hu_levelid": "编号1","hu_levelname": "名称1"},
+		{"hu_levelid": "编号2","hu_levelname": "名称2"},
+		{"hu_levelid": "编号3","hu_levelname": "名称3"},
+		{"hu_levelid": "编号4","hu_levelname": "名称4"},
+		{"hu_levelid": "编号5","hu_levelname": "名称5"},
+		{"hu_levelid": "编号6","hu_levelname": "名称6"}
+	]
+}

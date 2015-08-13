@@ -1,0 +1,232 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta content="yes" name="apple-mobile-web-app-capable"/> 
+    <meta content="yes" name="apple-touch-fullscreen"/> 
+    <meta name="data-spm" content="a215s"/> 
+    <meta content="telephone=no,email=no" name="format-detection"/>
+    <meta content="fullscreen=yes,preventMove=no" name="ML-Config"/>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;" name="viewport">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires"content="0">
+
+    <title></title>
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+  </head>
+  <body ng-app="app">
+
+
+
+
+    <header ng-controller="header" >
+      <a href="javascript:history.go(-1)" class="goback" ng-if="data.goback"></a>
+      <h1>{{data.header}}</h1>
+    </header>
+
+    <div ng-view=""></div>
+
+
+    <script type="text/ng-template" id="main.html">
+        <form class="search" ng-controller="search" ng-submit="submit()">
+          <label>
+            <input type="text" placehoder="请输入关键字搜索" ng-model="data.key">
+            <button type="submit"><i class="icon icon-find"></i></button>
+          </label>
+        </form>
+        <dl class="prompt" >
+          <dt ng-show="lately">最近搜索<a ng-click="cleanUp()" >清除</a></dt>
+          <dd ng-show="lately">
+            <a ng-repeat="item in late track by $index" ng-click="search(item)">{{item}}</a>
+          </dd>
+          <dt>热门搜索 <a ng-click="updateHot()" >换一批</a></dt>
+          <dd>
+            <a ng-repeat="item in hot track by $index" ng-click="search(item)">{{item}}</a>
+          </dd>
+        </dl>        
+    </script>
+
+    <script type="text/ng-template" id="list.html">
+        <form class="search list_serch" ng-controller="search" ng-submit="submit()">
+            <label>
+                <input type="text" placehoder="请输入关键字搜索" value="{{key}}" ng-model="data.key">
+                <button type="submit"><i class="icon icon-find"></i></button>
+                <a ng-click="filter()">筛选</a>
+            </label>
+        </form>
+
+
+        <section class="list">
+            <h2>
+                <a ng-click="orderDef()">默认</a>
+                <a ng-repeat="item in list" ng-click="order($index)">{{item.name}}{{item.drop?'↓':'↑'}}</a>
+            </h2>
+            <ul dr-window-infinite-scroll="loadMore()" >
+                <li ng-repeat="item in data.list track by $index" ng-click="getUser(item)">
+
+                    <img ng-src="{{item.base}}" >
+                    <h3>{{item.hu_teachername}}({{item.hu_teacheremployeenumber}})</h3>
+                    <p>{{item.hu_depat}} &nbsp;</p>
+                    <cite>
+                        <i class="icon icon-idcard"></i>{{item.hu_project}} <br>
+                        <i class="icon icon-write"></i><span>{{item.hu_givelessonsnumber}}次 , 共{{item.hu_avg}}课时</span>
+                        <i class="icon icon-love"></i><span>{{item.hu_avgIssatisfaction}}</span>
+                    </cite>
+                </li>
+            </ul>
+
+        </section>
+    </script>
+
+    <script type="text/ng-template" id="user.html">
+            <article class="user">
+              <section class="user_msg">
+                <img ng-src="{{user.base}}" >
+                <h2>{{user.hu_teachername}}({{user.hu_teacheremployeenumber}})</h2>
+                <!-- <small><i class="icon icon-grade"></i>高级讲师</small> -->
+                <p>
+                  <i class="icon icon-idcard"></i>{{user.hu_project}} <br>
+                  <i class="icon icon-write"></i>{{user.hu_givelessonsnumber}}次 , 共{{user.hu_avg}}课时 <br>
+                  <i class="icon icon-love"></i><em>{{user.hu_avgIssatisfaction}}</em>
+                </p>
+              </section>
+
+              <section class="user_nav">
+                <cite>
+                  <a ng-click="nav('base')" ng-class="{'active':item.base}">基本信息</a>
+                  <a ng-click="nav('recode')" ng-class="{'active':item.recode}">授课记录</a>
+                  <a ng-click="nav('anthen')" ng-class="{'active':item.anthen}">认证详情</a>
+                  <a ng-click="nav('x')" ng-class="{'active':item.x}">X档案</a>
+                </cite>
+              </section>
+
+              <section class="user_base" id="base" ng-show="item.base">
+                <h3><strong>基本信息</strong></h3>
+                <p>
+                  所在区域 : {{base.hu_area}}<br>
+                  讲师级别 ：{{base.hu_level}}<br>
+                  地址 ：{{base.hu_address}}<br>
+                  个人介绍 ：{{base.hu_brief}}
+                </p>
+              </section>
+
+
+              <section class="user_recode" id="recode" ng-show="item.recode">
+                <h3><strong>授课记录</strong></h3>
+                <ul>
+                  <li ng-repeat="item in recode track by $index">
+                    <h4>{{item.hu_givelessonsdate}}</h4>
+                    <p>{{item.hu_givelessonsname}}</p>
+                    <span><i class="icon icon-chart"></i>5个课时</span>
+                    <span><i class="icon icon-love"></i><em>{{item.hu_issatisfaction}}</em></span>
+                  </li>
+                </ul>
+                
+              </section>
+
+
+              <section class="user_authen" id="anthen" ng-show="item.anthen">
+                <h3><strong>认证详情</strong></h3>
+                <ul>
+                  <li ng-repeat="item in anthen track by $index">
+                    <img src="images/user_pic1.png" alt="">
+                    <p>
+                      <span> 已认证：</span>{{item.hu_coursename}}<br>
+                      <span>历史授课：</span><em>{{item.hu_historycoursecount}}</em>次，共<em>{{item.hu_historycoursetime}}</em>课时<br>
+                      <span>认证时间：</span>{{item.hu_coursedate}}</p>
+                  </li>
+                </ul>
+              </section>
+
+              <section class="user_x" id="x" ng-show="item.x">
+                <h3><strong>X档案</strong></h3>
+                <cite>
+                  <img src="images/user_X.png" alt="">
+                  <p>X档案正在玩命开发中......</p>
+                </cite>
+              </section>
+              <section class="user_call" >
+                <cite>
+                  <!-- <a href="#"><i class="icon icon-care"></i>{{care? '取消关注':'关注'}}</a> -->
+                  <a ng-click="call(base.hu_mobile)"><i class="icon icon-phone"></i>电话</a>
+                </cite>
+              </section>
+              
+            </article>
+    </script>
+
+    <script type="text/ng-template" id="filter.html">
+    
+        <form  class="filter" ng-submit="submit()">
+
+            <dl ng-class="{'open':show.level}">
+                <dt ng-click="toggle('level')">级别 <i></i></dt>
+                <dd>
+                    <label ng-repeat="item in level track by $index" ng-class="{'select':item.selected}">
+                        <input type="checkbox" ng-model="item.selected" >
+                        <b>{{item.hu_levelname}}</b>
+                    </label>
+                </dd>
+            </dl>
+
+            <dl ng-class="{'open':show.satisfied}">
+                <dt ng-click="toggle('satisfied')">满意度 <em>({{satisfied.low}}%-{{satisfied.high}}%)</em> <i></i></dt>
+                <dd>
+                    <slider floor="0" ceiling="100" step="1" ng-model-low="satisfied.low" ng-model-high="satisfied.high" ></slider>
+                </dd>
+            </dl>
+
+            
+            <dl ng-class="{'open':show.duration}">
+                <dt ng-click="toggle('duration')">授课时长 <em>({{duration.low}}-{{duration.high}})</em> <i></i></dt>
+                <dd>
+                    <slider floor="0" ceiling="100" step="1" ng-model-low="duration.low" ng-model-high="duration.high" ></slider>
+                </dd>
+            </dl>
+
+            
+
+            
+            <div class="filter_button">
+                <cite>
+                    <input type="reset" value="清除选项" ng-click="reset()">
+                    <input type="submit" value="确定">
+                </cite>
+            </div>
+        </form>
+    
+    </script>
+
+
+
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+    <script src="bower_components/angular-infinite-scroll/src/infinite-scroll.js"></script>
+    <script src="bower_components/angular-slider/slider.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/header.js"></script>
+        <script src="scripts/controllers/search.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/list.js"></script>
+        <script src="scripts/controllers/filter.js"></script>
+        <script src="scripts/controllers/user.js"></script>
+        <!-- endbuild -->
+</body>
+</html>

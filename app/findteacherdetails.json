@@ -1,0 +1,53 @@
+{
+	"status": 1, 
+	"msg": "系统异常，参数输入错误", 
+	"currentpage": 1,
+	"pagesize": 10, 
+	"totalcount": 100, 
+	"totalpage": 10, 
+	"data": [
+		{
+			"hu_coursename": "青训班实践认证、市场青训班",
+			"hu_coursedate":"2015年10月21日",
+			"hu_historycoursecount": "3",
+			"hu_historycoursetime": "8"
+
+		},{
+			"hu_coursename": "青训班实践认证、市场青训班",
+			"hu_coursedate":"2015年10月21日",
+			"hu_historycoursecount": "3",
+			"hu_historycoursetime": "8"
+
+		},{
+			"hu_coursename": "青训班实践认证、市场青训班",
+			"hu_coursedate":"2015年10月21日",
+			"hu_historycoursecount": "3",
+			"hu_historycoursetime": "8"
+
+		},{
+			"hu_coursename": "青训班实践认证、市场青训班",
+			"hu_coursedate":"2015年10月21日",
+			"hu_historycoursecount": "3",
+			"hu_historycoursetime": "8"
+
+		},{
+			"hu_coursename": "青训班实践认证、市场青训班",
+			"hu_coursedate":"2015年10月21日",
+			"hu_historycoursecount": "3",
+			"hu_historycoursetime": "8"
+
+		},{
+			"hu_coursename": "青训班实践认证、市场青训班",
+			"hu_coursedate":"2015年10月21日",
+			"hu_historycoursecount": "3",
+			"hu_historycoursetime": "8"
+
+		},{
+			"hu_coursename": "青训班实践认证、市场青训班",
+			"hu_coursedate":"2015年10月21日",
+			"hu_historycoursecount": "3",
+			"hu_historycoursetime": "8"
+
+		}
+	]
+}

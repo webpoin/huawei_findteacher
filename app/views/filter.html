@@ -1,0 +1,48 @@
+<form  class="filter" ng-submit="submit()">
+
+	<!-- <dl ng-repeat="item in data.filter" ng-class="{'open': item.open}">
+		<dt ng-click="toggle($event)">{{item.name}} <i></i></dt>
+		<dd>
+			<label ng-repeat="i in item.data track by $index" ng-class="{'subname': i.subname,'select':i.select}">
+				<input type="checkbox" name="i.name" ng-model="i.select" ng-if="!i.subname">
+				<b>{{i.value}}</b>
+			</label>
+		</dd>
+	</dl> -->
+
+
+	<dl>
+		<dt ng-click="toggle($event)">级别 <i></i></dt>
+		<dd>
+			<label ng-repeat="item in level track by $index" ng-class="{'select':item.selected}">
+				<input type="checkbox" ng-model="item.selected" >
+				<b>{{item.hu_levelname}}</b>
+			</label>
+		</dd>
+	</dl>
+
+	<dl ng-click="toggle($event)">
+		<dt>满意度 <em>({{satisfied.low}}%-{{satisfied.high}}%)</em> <i></i></dt>
+		<dd>
+			<slider floor="0" ceiling="100" step="1" ng-model-low="satisfied.low" ng-model-high="satisfied.high" ></slider>
+		</dd>
+	</dl>
+
+	
+	<dl ng-click="toggle($event)">
+		<dt>授课时长 <em>({{duration.low}}-{{duration.high}})</em> <i></i></dt>
+		<dd>
+			<slider floor="0" ceiling="100" step="1" ng-model-low="duration.low" ng-model-high="duration.high" ></slider>
+		</dd>
+	</dl>
+
+	
+
+	
+	<div class="filter_button">
+		<cite>
+			<input type="reset" value="清除选项">
+			<input type="submit" value="确定">
+		</cite>
+	</div>
+</form>

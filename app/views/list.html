@@ -1,0 +1,28 @@
+<form class="search list_serch" ng-controller="search" ng-submit="submit()">
+	<label>
+		<input type="text" placehoder="请输入关键字搜索" value="{{key}}" ng-model="data.key">
+        <button type="submit"><i class="icon icon-find"></i></button>
+		<a ng-click="filter()">筛选</a>
+	</label>
+</form>
+
+
+<section class="list">
+	<h2>
+		<a ng-click="orderDef()">默认</a>
+		<a ng-repeat="item in list" ng-click="order($index)">{{item.name}}{{item.drop?'↓':'↑'}}</a>
+	</h2>
+	<ul dr-window-infinite-scroll="loadMore()" >
+		<li ng-repeat="item in data.list track by $index" ng-click="getUser(item)">
+			<img ng-src="{{item.hu_headsculpture}}" alt="">
+			<h3>{{item.hu_teachername}}({{item.hu_teacheremployeenumber}})</h3>
+			<p>{{item.hu_depat}}</p>
+			<cite>
+				<i class="icon icon-idcard"></i>{{item.hu_project}} <br>
+				<i class="icon icon-write"></i><span>{{item.hu_givelessonsnumber}}次 , 共{{item.hu_avg}}课时</span>
+				<i class="icon icon-love"></i><span>{{item.hu_avgIssatisfaction}}</span>
+			</cite>
+		</li>
+	</ul>
+
+</section>

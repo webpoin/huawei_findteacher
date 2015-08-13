@@ -1,0 +1,27 @@
+{
+	"status": 1, 
+	"msg": "系统异常，参数输入错误", 
+	"data": [
+		{"hu_hotsearchid":"项目管理","hu_hotsearchname": "项目管理"},
+		{"hu_hotsearchid":"蔡慧","hu_hotsearchname": "蔡慧"},
+		{"hu_hotsearchid":"核心价值观","hu_hotsearchname": "核心价值观"},
+		{"hu_hotsearchid":"教授","hu_hotsearchname": "教授"},
+		{"hu_hotsearchid":"高研班","hu_hotsearchname": "高研班"},
+		{"hu_hotsearchid":"高级讲师","hu_hotsearchname": "高级讲师"},
+		{"hu_hotsearchid":"金牌讲师","hu_hotsearchname": "金牌讲师"},
+		{"hu_hotsearchid":"西非","hu_hotsearchname": "西非"},
+		{"hu_hotsearchid":"demo1","hu_hotsearchname": "demo1"},
+		{"hu_hotsearchid":"demo2","hu_hotsearchname": "demo2"},
+		{"hu_hotsearchid":"demo3","hu_hotsearchname": "demo3"},
+		{"hu_hotsearchid":"demo4","hu_hotsearchname": "demo4"},
+		{"hu_hotsearchid":"demo5","hu_hotsearchname": "demo5"},
+		{"hu_hotsearchid":"demo6","hu_hotsearchname": "demo6"},
+		{"hu_hotsearchid":"demo7","hu_hotsearchname": "demo7"},
+		{"hu_hotsearchid":"demo8","hu_hotsearchname": "demo8"},
+		{"hu_hotsearchid":"demo9","hu_hotsearchname": "demo9"},
+		{"hu_hotsearchid":"id","hu_hotsearchname": "热门搜索字段不允许重复"}
+	]
+}
+
+
+

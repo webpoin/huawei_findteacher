@@ -1,0 +1,145 @@
+<article class="user">
+      <section class="user_msg">
+        <img src="images/user.jpg" alt="">
+        <h2>{{user.hu_teachername}}({{user.hu_teacheremployeenumber}})</h2>
+        <!-- <small><i class="icon icon-grade"></i>高级讲师</small> -->
+        <p>
+          <i class="icon icon-idcard"></i>{{user.hu_project}} <br>
+          <i class="icon icon-write"></i>{{user.hu_givelessonsnumber}}次 , 共{{user.hu_avg}}课时 <br>
+          <i class="icon icon-love"></i><em>{{user.hu_avgIssatisfaction}}</em>
+        </p>
+      </section>
+
+      <section class="user_nav">
+        <cite>
+          <a href="#base" class="active">基本信息</a>
+          <a href="#recode">授课记录</a>
+          <a href="#anthen">认证详情</a>
+          <a href="#x">X档案</a>
+        </cite>
+      </section>
+
+      <section class="user_base" id="base">
+        <h3><strong>基本信息</strong></h3>
+        <p>
+          所在区域 : {{base.hu_area}}<br>
+          讲师级别 ：{{base.hu_level}}<br>
+          地址 ：{{base.hu_address}}<br>
+          个人介绍 ：{{base.hu_brief}}
+        </p>
+      </section>
+
+
+      <section class="user_recode" id="recode">
+        <h3><strong>授课记录</strong></h3>
+        <ul>
+          <li ng-repeat="item in recode track by $index">
+            <h4>{{item.hu_givelessonsdate}}</h4>
+            <p>{{item.hu_givelessonsname}}</p>
+            <span><i class="icon icon-chart"></i>5个课时</span>
+            <span><i class="icon icon-love"></i><em>{{item.hu_issatisfaction}}</em></span>
+          </li>
+        </ul>
+        
+      </section>
+
+
+      <section class="user_authen" id="anthen">
+        <h3><strong>认证详情</strong></h3>
+        <ul>
+          <li ng-repeat="item in anthen track by $index">
+            <img src="images/user_pic1.png" alt="">
+            <p>已认证：{{item.hu_coursename}}<br>历史授课：<em>{{item.hu_historycoursecount}}</em>次，共<em>{{item.hu_historycoursetime}}</em>课时<br>认证时间：{{item.hu_coursedate}}</p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="user_x" id="x">
+        <h3><strong>X档案</strong></h3>
+        <cite>
+          <img src="images/user_X.png" alt="">
+          <p>X档案正在玩命开发中......</p>
+        </cite>
+      </section>
+
+      <!-- <section class="user_man">
+        <h3><strong>青训班项目认证</strong></h3>
+        <ul>
+          <li>
+            <img src="images/user_pic2.png" alt="">
+            <h4>Wendy Lee</h4>
+            <p>青训班、交付项目管理资源池      GST333333部</p>
+          </li>
+          <li>
+            <img src="images/user_pic2.png" alt="">
+            <h4>Wendy Lee</h4>
+            <p>青训班、交付项目管理资源池      GST333333部</p>
+          </li>
+          <li>
+            <img src="images/user_pic2.png" alt="">
+            <h4>Wendy Lee</h4>
+            <p>青训班、交付项目管理资源池      GST333333部</p>
+          </li>
+          <li>
+            <img src="images/user_pic2.png" alt="">
+            <h4>Wendy Lee</h4>
+            <p>青训班、交付项目管理资源池      GST333333部</p>
+          </li>
+          <li>
+            <img src="images/user_pic2.png" alt="">
+            <h4>Wendy Lee</h4>
+            <p>青训班、交付项目管理资源池      GST333333部</p>
+          </li>
+          <li>
+            <img src="images/user_pic2.png" alt="">
+            <h4>Wendy Lee</h4>
+            <p>青训班、交付项目管理资源池      GST333333部</p>
+          </li>
+        </ul>
+      </section> -->
+
+      <!-- <section class="user_man">
+        <h3><strong>同部门</strong></h3>
+        <ul>
+          <li>
+            <img src="images/user_pic2.png" alt="">
+            <h4>Wendy Lee</h4>
+            <p>青训班、交付项目管理资源池      GST333333部</p>
+          </li>
+          <li>
+            <img src="images/user_pic2.png" alt="">
+            <h4>Wendy Lee</h4>
+            <p>青训班、交付项目管理资源池      GST333333部</p>
+          </li>
+          <li>
+            <img src="images/user_pic2.png" alt="">
+            <h4>Wendy Lee</h4>
+            <p>青训班、交付项目管理资源池      GST333333部</p>
+          </li>
+          <li>
+            <img src="images/user_pic2.png" alt="">
+            <h4>Wendy Lee</h4>
+            <p>青训班、交付项目管理资源池      GST333333部</p>
+          </li>
+          <li>
+            <img src="images/user_pic2.png" alt="">
+            <h4>Wendy Lee</h4>
+            <p>青训班、交付项目管理资源池      GST333333部</p>
+          </li>
+          <li>
+            <img src="images/user_pic2.png" alt="">
+            <h4>Wendy Lee</h4>
+            <p>青训班、交付项目管理资源池      GST333333部</p>
+          </li>
+        </ul>
+      </section> -->
+
+
+      <section class="user_call">
+        <cite>
+          <!-- <a href="#"><i class="icon icon-care"></i>{{care? '取消关注':'关注'}}</a> -->
+          <a href="tel:{{base.hu_mobile}}"><i class="icon icon-phone"></i>电话</a>
+        </cite>
+      </section>
+      
+    </article>
