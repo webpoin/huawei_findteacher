@@ -12,7 +12,6 @@ angular.module('app').controller('ListCtrl', function ($scope,$location,Data,Ser
 	Data.header = "搜索";
 	Data.goback = true;
 	
-	Server.search();
 	
 	$scope.list = [ 		
 		{name:'级别',drop:true},

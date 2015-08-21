@@ -26,13 +26,14 @@
 
 
 
+    <div class="loading" ng-show="false"><i class="icon icon-loading"></i><span>努力加载中...</span></div>
 
     <header ng-controller="header" >
-      <a href="javascript:history.go(-1)" class="goback" ng-if="data.goback"></a>
-      <h1>{{data.header}}</h1>
+      <a href="javascript:history.go(-1)" class="goback" ng-class="{'show':data.goback}"></a>
+      <h1 ng-bind="data.header">找老师</h1>
     </header>
 
-    <div ng-view=""></div>
+    <div ng-view="" class="view"></div>
 
 
     <script type="text/ng-template" id="main.html">
@@ -70,6 +71,8 @@
                 <a ng-repeat="item in list" ng-click="order($index)">{{item.name}}{{item.drop?'↓':'↑'}}</a>
             </h2>
             <ul dr-window-infinite-scroll="loadMore()" >
+                <li ng-show="data.list.length==0 && data.info ==0" class="list_nodata">正在搜索，请稍等...</li>
+                <li ng-show="data.list.length==0 && data.info ==1" class="list_nodata"><i class="icon icon-nodata"></i> 无数据，请重新搜索</li>
                 <li ng-repeat="item in data.list track by $index" ng-click="getUser(item)">
 
                     <img ng-src="{{item.base}}" >
@@ -121,6 +124,8 @@
 
               <section class="user_recode" id="recode" ng-show="item.recode">
                 <h3><strong>授课记录</strong></h3>
+
+                <p ng-show="recode.length==0" class="nodata"><i class="icon icon-nodata"></i> 无授课记录 </p>
                 <ul>
                   <li ng-repeat="item in recode track by $index">
                     <h4>{{item.hu_givelessonsdate}}</h4>
@@ -135,6 +140,7 @@
 
               <section class="user_authen" id="anthen" ng-show="item.anthen">
                 <h3><strong>认证详情</strong></h3>
+                <p ng-show="anthen.length==0" class="nodata"><i class="icon icon-nodata"></i> 无认证详情 </p>
                 <ul>
                   <li ng-repeat="item in anthen track by $index">
                     <img src="images/user_pic1.png" alt="">
@@ -186,22 +192,22 @@
 
             
             <dl ng-class="{'open':show.duration}">
-                <dt ng-click="toggle('duration')">授课时长 <em>({{duration.low}}-{{duration.high}})</em> <i></i></dt>
+                <dt ng-click="toggle('duration')">授课时长 <em>({{duration.low}}-{{duration.high == 100? '100+': duration.high}})</em> <i></i></dt>
                 <dd>
                     <slider floor="0" ceiling="100" step="1" ng-model-low="duration.low" ng-model-high="duration.high" ></slider>
                 </dd>
             </dl>
 
-            
 
-            
             <div class="filter_button">
-                <cite>
-                    <input type="reset" value="清除选项" ng-click="reset()">
-                    <input type="submit" value="确定">
-                </cite>
-            </div>
+              <cite>
+                  <input type="reset" value="清除选项" ng-click="reset()">
+                  <input type="submit" value="确定" >
+              </cite>
+          </div>
+            
         </form>
+        
     
     </script>
 

@@ -46,7 +46,7 @@ angular.module('app').controller('FilterCtrl', function ($scope,$location,Data,S
 			$scope.level[i].selected && res.push($scope.level[i].hu_levelid);
 		}
 		Data.filter.level = res.join(',');
-
+		Server.search();
 		$location.path('/list');		
 	}
 

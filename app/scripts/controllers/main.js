@@ -12,7 +12,7 @@ angular.module('app').controller('MainCtrl', function($scope, $http ,$location, 
 		Data.header = "找老师";
 		Data.goback = false;
 
-		var hot = [];
+		// var hot = [];
 		var hot_idx = 0;
 		var hot_each = 8;
 		var late = localStorageService.get('late');
@@ -26,9 +26,9 @@ angular.module('app').controller('MainCtrl', function($scope, $http ,$location, 
 		// 点击“换一批”时更新数据
 		$scope.updateHot = function() {
 
-			$scope.hot = hot.slice(hot_idx * hot_each, (hot_idx + 1) * hot_each);
+			$scope.hot = Data.hot.slice(hot_idx * hot_each, (hot_idx + 1) * hot_each);
 			hot_idx++;
-			hot_idx = hot.length > hot_idx * hot_each ? hot_idx:0;
+			hot_idx = Data.hot.length > hot_idx * hot_each ? hot_idx:0;
 		}
 
 		// 点击“清除” 清除本地数据
@@ -40,18 +40,20 @@ angular.module('app').controller('MainCtrl', function($scope, $http ,$location, 
 		// 搜索
 		$scope.search =function(key){
 			Data.key = key;
+			Server.search();
 			$location.path('/list');
 		} 
-		// = Server.search;
-
-
 
 
 		// 异步取热门搜索
-		Server.getHot(function(json){
-			hot = json;
+		if(Data.hot){
 			$scope.updateHot();
-		})
+		}else{
+			Server.getHot(function(json){
+				Data.hot = json;
+				$scope.updateHot();
+			})
+		}
 		
 
 		

@@ -83,12 +83,26 @@ angular.module('app', [
 			// 搜索
 			search: function(key, callback) {
 
+				var more = key && key.more;
+
 				// 判断是不是刷新分页
-				Data.index = key && key.more ? Data.index+1 :1;
+				Data.index = more ? Data.index+1 :1;
+
+				// 搜索前清空原数据
+				Data.list.length = more ? Data.list.length : 0 ;
+				
+				// 设置提示语
+				Data.info = 0;
+
+
+				// 判断是否分页无数据了(如果无数据，则停止访问服务器)
+				Data.have_more = more ? Data.have_more : true ;
+				if(!Data.have_more ) return;
+
 
 				$http({
 					method: 'GET',
-					url: 'http://192.168.1.104:3000/ilearningmobile/services/mobile/search/huAppSearchService/findSearchTeacherInfo',
+					url: 'http://localhost:3000/ilearningmobile/services/mobile/search/huAppSearchService/findSearchTeacherInfo',
 					data:'json',
 					params:params({
 						searchname: Data.key, 	//搜索关键字
@@ -102,13 +116,23 @@ angular.module('app', [
 					})
 				}).success(function(json) {
 					if(!json || json.status !=1 ){return;}
-					// Data.list = Data.index>0? Data.list.concat(json.data) : json.data;
 
-					Data.list = Data.index>1? Data.list.concat(json.data) : json.data;
+
+					// 判断页数如果小于分页数，则分页停止
+					Data.have_more = json.data.length>=json.pagesize;
+
+
+					// 是否为下拉刷新
+					Data.list = more ? Data.list.concat(json.data) : json.data;
+					
+					// 判断提示语
+					Data.list.length == 0 && (Data.info = 1);
+
+
+					// 异步取图片
 					for(var i =0,l=json.data.length;i<l;i++){
-
 						(function(teacher){
-							$http({url: 'http://192.168.1.104:4000/ilearningmobile/services/imobile/commonService/commonService/getImageService?clientType=2&sign=4e45876a130c72d33b37086a2bcf1c19&imageType_request=ratingType&ratingW3Account='+teacher.hu_w3account+'&language=0&w3HuaweiAccount=p00121731&requestTime=1438946020101&clientVer=18',}).success(function(pic){
+							$http({url: 'http://localhost:4000/ilearningmobile/services/imobile/commonService/commonService/getImageService?clientType=2&sign=4e45876a130c72d33b37086a2bcf1c19&imageType_request=ratingType&ratingW3Account='+teacher.hu_w3account+'&language=0&w3HuaweiAccount=p00121731&requestTime=1438946020101&clientVer=18',}).success(function(pic){
 								if(!pic.imageKey) return;
 								teacher.base = 'data:image/gif;base64,' + pic.imageKey.replace(/\n/g,'');
 							});
@@ -124,7 +148,7 @@ angular.module('app', [
 			getHot: function(callback) {
 				$http({
 					method: 'GET',
-					url: 'http://192.168.1.104:3000/ilearningmobile/services/mobile/search/huAppSearchService/findHotSearch?orderNumber=40',
+					url: 'http://localhost:3000/ilearningmobile/services/mobile/search/huAppSearchService/findHotSearch?orderNumber=40',
 				}).success(function(json){
 					var res = [];
 					if(!json || json.status !=1 ){return;}
@@ -138,7 +162,7 @@ angular.module('app', [
 			getLevel:function(callback){
 				$http({
 					method: 'GET',
-					url: 'http://192.168.1.104:3000/ilearningmobile/services/mobile/appcentres/huAppCentreService/findAllTeacherLevel',					
+					url: 'http://localhost:3000/ilearningmobile/services/mobile/appcentres/huAppCentreService/findAllTeacherLevel',					
 				}).success(function(json){
 					if(!json || json.status !=1 ){return;}
 					callback && callback(json.data);
@@ -158,7 +182,7 @@ angular.module('app', [
 				// 老师基本信息
 				$http({
 					method: 'GET',
-					url: 'http://192.168.1.104:3000/ilearningmobile/services/mobile/appcentres/huAppCentreService/findTeacherBase',
+					url: 'http://localhost:3000/ilearningmobile/services/mobile/appcentres/huAppCentreService/findTeacherBase',
 					params:params({teacherid:Data.user.hu_teacherid}),
 				}).success(function(json){
 					json && back({base:json.data[0]});
@@ -167,7 +191,7 @@ angular.module('app', [
 				// 授课记录
 				$http({
 					method: 'GET',
-					url: 'http://192.168.1.104:3000/ilearningmobile/services/mobile/appcentres/huAppCentreService/findTeacherGiveLessons',
+					url: 'http://localhost:3000/ilearningmobile/services/mobile/appcentres/huAppCentreService/findTeacherGiveLessons',
 					params:params({teacherid:Data.user.hu_teacherid}),
 				}).success(function(json){
 					json && back({recode:json.data});
@@ -176,7 +200,7 @@ angular.module('app', [
 				// 认证详情
 				$http({
 					method: 'GET',
-					url: 'http://192.168.1.104:3000/ilearningmobile/services/mobile/appcentres/huAppCentreService/findTeacherDetails',
+					url: 'http://localhost:3000/ilearningmobile/services/mobile/appcentres/huAppCentreService/findTeacherDetails',
 					params:params({teacherid:Data.user.hu_teacherid}),
 				}).success(function(json){
 					json && back({anthen:json.data});
